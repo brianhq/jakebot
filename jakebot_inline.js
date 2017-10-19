@@ -38,7 +38,7 @@ client.on("message", (message) => {
     if(command === "help") {
         message.channel.send("Hi I'm Jakebot! Right now I can !say, !help, and !ping. Not much else, I'm afraid.");
     }
-    
+
     if(command === "ping") {
         message.channel.send("pong!");
     }
@@ -52,39 +52,39 @@ client.on("message", (message) => {
         // And we get the bot to say the thing:
         message.channel.send(sayMessage);
     }
-    
+
     if (command === "versus") {
-        let heads = message.mentions.members.first();
-        let tails = message.mentions.members.last();
-        const round1 = Math.random();
-        const round2 = Math.random();
-        const round3 = Math.random();
-        
+        let mentions = message.mentions.members.array();
+        let heads = mentions[0];
+        let tails = mentions[1];
+        var round1 = Math.random();
+        var round2 = Math.random();
+        var round3 = Math.random();
+
         const embed = new Discord.RichEmbed()
             .setTitle("COIN FLIP #RR AC FINAL PLUS")
             .setColor("#6199B5")
             .setDescription("HEAVEN OR HELL, LET'S JAKE!");
-        
-        //if first round goes Heads
+
         if(round1 < 0.5) {
             embed.addField("ROUND 1", `${heads} gets first strike!`);
-            
+
             //if Heads wins again
             if(round2 < 0.5) {
                 embed.addField("ROUND 2", `${heads} takes it straight!`);
                 embed.addField("THE WINNER IS", `${heads}!  There was never any doubt!`);
             }
-            
+
             //Tails takes Round 2
             else {
                 embed.addField("ROUND 2", `${tails} answers back!`);
-                
+
                 //if Heads wins game 3
                 if(round3 < 0.5) {
                     embed.addField("ROUND 3", `${heads} claims the crown!`);
                     embed.addField("THE WINNER IS", `${heads}! A nervous victory!`);
                 }
-                
+
                 //Tails wins game 3
                 else {
                     embed.addField("ROUND 3", `${tails} comes out on top!`);
@@ -94,29 +94,29 @@ client.on("message", (message) => {
         }
         else {
             embed.addField("ROUND 1", `${tails} tastes first blood!`);
-            
+
             //if Heads wins Round 2
             if(round2 < 0.5) {
                 embed.addField("ROUND 2", `${heads} retaliates!`);
-                
+
                 //if Heads wins Round 3
                 if(round3 < 0.5) {
                     embed.addField("ROUND 3", `${heads} couldn't be stopped!`);
                     embed.addField("THE WINNER IS", `${heads}! What a comeback!`);
                 }
-                
+
                 else {
                     embed.addField("ROUND 3", `${tails} strikes the fatal blow!`);
                     embed.addField("THE WINNER IS", `${tails}! What an amazing match!`);
                 }
             }
-            
+
             else {
                 embed.addField("ROUND 2", `${tails} is in the zone!`);
                 embed.addField("THE WINNER IS", `${tails}! A beautiful victory!`);
             }
         }
-        
+
         message.channel.send({embed});
     }
 });
